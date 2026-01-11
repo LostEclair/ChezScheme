@@ -386,6 +386,7 @@
   i3fb      ti3fb
   i3ob      ti3ob
   i3nb      ti3nb
+  i3hai     ti3hai
   i3s2      ti3s2
   i3qnx     ti3qnx
   i3gnu     ti3gnu
@@ -397,6 +398,7 @@
   a6fb      ta6fb
   a6ob      ta6ob
   a6nb      ta6nb
+  a6hai     ta6hai
   a6s2      ta6s2
   ppc32osx  tppc32osx
   ppc32le   tppc32le

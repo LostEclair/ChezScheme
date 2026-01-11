@@ -21,6 +21,8 @@
   [(i3osx ti3osx a6osx ta6osx arm64osx tarm64osx
           a6ios ta6ios arm64ios tarm64ios)
    (load-shared-object "libc.dylib")]
+  [(i3hai ti3hai a6hai ta6hai)
+   (load-shared-object "libroot.so")]
   [else
    (load-shared-object "libc.so")])
 

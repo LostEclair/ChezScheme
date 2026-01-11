@@ -244,6 +244,15 @@
       (error? (load-shared-object 3))
     )
    ]
+  [(i3hai ti3hai a6hai ta6hai)
+   (mat load-shared-object
+     (file-exists? foreign1.so)
+      (begin (load-shared-object foreign1.so) #t)
+      (begin (load-shared-object "libroot.so") #t)
+      #t
+      (error? (load-shared-object 3))
+    )
+   ]
   [(pb pb32l pb32b pb64l pb64b tpb tpb32l tpb32b tpb64l tpb64b)
    (mat load-shared-object
      (file-exists? foreign1.so)
@@ -254,7 +263,8 @@
                               #t))])
        (or (try-load "libc.so.7")
            (try-load "libc.so.6")
-           (try-load "libc.dylib")))
+           (try-load "libc.dylib")
+           (try-load "libroot.so")))
      (error? (load-shared-object 3)))]
   [else
    (mat foreign-procedure
@@ -3262,6 +3272,8 @@
         [(i3osx ti3osx a6osx ta6osx ppc32osx tppc32osx arm64osx tarm64osx
                 a6ios ta6ios arm64ios tarm64ios)
          '(load-shared-object "libc.dylib")]
+        [(i3hai ti3hai a6hai ta6hai)
+         '(load-shared-object "libroot.so")]
         [(pb pb32l pb32b pb64l pb64b tpb tpb32l tpb32b tpb64l tpb64b)
          '(let ([try-load (lambda (path)
                             (guard (x [#t #f])
@@ -3269,7 +3281,8 @@
                                    #t))])
             (or (try-load "libc.so.7")
                 (try-load "libc.so.6")
-                (try-load "libc.dylib")))]
+                (try-load "libc.dylib")
+                (try-load "libroot.so")))]
         [else (error 'load-libc "unrecognized machine type ~s" (machine-type))]))
     (define varargs_df (foreign-procedure (__varargs_after 1) "varargs_df" (double int int) double))
     (define varargs_dfii (foreign-procedure (__varargs_after 2) "varargs_dfii" (double int int) double))

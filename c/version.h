@@ -438,6 +438,34 @@ typedef int tputsputcchar;
 #define UNUSED_SUB_INDEX , UNUSED int sub_index
 #endif
 
+#if defined(__HAIKU__)
+#define NOBLOCK O_NONBLOCK
+#define LOAD_SHARED_OBJECT
+#define USE_MMAP
+#define MMAP_HEAP
+#define IEEE_DOUBLE
+#define LDEXP
+#define ARCHYPERBOLIC
+#define GETPAGESIZE() getpagesize()
+typedef char *memcpy_t;
+#define MAKE_NAN(x) { x = 0.0; x = x / x; }
+#define GETWD(x) getcwd((x),PATH_MAX)
+typedef int tputsputcchar;
+#define LOCKF
+#define DIRMARKERP(c) ((c) == '/')
+#ifndef DISABLE_X11
+#define LIBX11 "libX11.so"
+#endif
+#define SECATIME(sb) (sb).st_atim.tv_sec
+#define SECCTIME(sb) (sb).st_ctim.tv_sec
+#define SECMTIME(sb) (sb).st_mtim.tv_sec
+#define NSECATIME(sb) (sb).st_atim.tv_nsec
+#define NSECCTIME(sb) (sb).st_ctim.tv_nsec
+#define NSECMTIME(sb) (sb).st_mtim.tv_nsec
+#define ICONV_INBUF_TYPE char **
+#define USE_OSSP_UUID
+#endif
+
 /*****************************************/
 /* Compilers                             */
 

@@ -185,6 +185,11 @@ case "${CONFIG_UNAME}" in
     installprefix=/usr/local
     installmansuffix=share/man
     ;;
+  Haiku)
+    unixsuffix=hai
+    installprefix=/boot/system/non-packaged
+    installmansuffix=../documentation/man #??
+    ;;
   SunOS)
     if uname -m | egrep 'i386|i686|amd64|athlon|x86_64' > /dev/null 2>&1 ; then
       m32=i3s2
@@ -916,6 +921,9 @@ if [ "$addflags" = "yes" ] ; then
     *osx)
         LIBS="${LIBS} ${iconvLib} -lm ${ncursesLib}"
         ;;
+    *hai)
+        LIBS="${LIBS} ${iconvLib} -lm ${ncursesLib}"
+        ;;
     *nt)
         LIBS="${LIBS} -lshell32 -luser32 -lole32 -lrpcrt4 -luuid"
         ;;
@@ -1007,6 +1015,9 @@ case "${flagsmuni}" in
     *nb)
         mdcflags="-fPIC -shared"
         ;;
+    *hai)
+        mdcflags="-fPIC -shared"
+        ;;
     *nt)
         mdcflags="-shared"
 	;;
@@ -1035,6 +1046,8 @@ case "${flagsmuni}" in
         ;;
     i3nb)
         mdldflags="-m elf_i386"
+        ;;
+    *hai)
         ;;
     *fb|*ob|*nb)
         ;;
