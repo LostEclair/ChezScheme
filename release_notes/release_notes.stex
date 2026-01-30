@@ -117,6 +117,14 @@ Online versions of both books can be found at
 %-----------------------------------------------------------------------------
 \section{Functionality Changes}\label{section:functionality}
 
+\subsection{Unicode 17.0.0 support (10.4.0)}
+
+The character sets, character classes, and word-breaking algorithms for character, string,
+and Unicode-related bytevector operations have now been updated to Unicode 17.0.0.
+
+The \scheme{char-indic-break-property} function was added to support decoding grapheme
+clusters with Indic conjuncts.
+
 \subsection{Add machine type a6gnu (10.4.0)}
 
 GNU/Hurd on x86\_64 is now supported as machine type a6gnu.
@@ -146,7 +154,9 @@ The compiler now avoids moving predicates from tail position when they may raise
 even if the result is known in case of a success.
 
 The type recovery pass has improved support for \scheme{exact}, \scheme{inexact},
-and similar functions.
+and similar functions. It also has partial support for more numeric predicates
+including \scheme{even?}, \scheme{odd?}, \scheme{positive?}, \scheme{negative?}
+and \scheme{real-valued?}.
 
 A bug that incorrectly determined the type of \scheme{(- x)} has been fixed.
 
@@ -2923,6 +2933,11 @@ in fasl files does not generally make sense.
 %-----------------------------------------------------------------------------
 \section{Bug Fixes}\label{section:bugfixes}
 
+\subsection{Unicode Indic\_Conjunct\_Break support (10.4.0)}
+
+The grapheme cluster break algorithm neglected to consider the Indic\_Conjunct\_Break
+property available since Unicode 15.
+
 \subsection{Corrections and refinements to error reporting (10.4.0)}
 
 A bug in the error message produced when \scheme{list*} and \scheme{cons*} are called with
@@ -2931,6 +2946,19 @@ zero arguments has been fixed.
 When \scheme{>} and \scheme{>=} are applied to two non-real arguments, the first argument
 is now reported as incorrect instead of the second. In general, when two or more arguments
 are invalid, there is no guarantee about which one is reported invalid.
+
+\subsection{Fix \scheme{remainder} and \scheme{modulo} for inexact/exact mixtures (10.4.0)}
+
+When \scheme{remainder} and \scheme{modulo} receive an inexact first
+argument and exact \scheme{1} or \scheme{-1} as a second argument, the
+result is now inexact \scheme{0.0} instead of exact \scheme{0}.
+
+When \scheme{remainder} and \scheme{modulo} receive an exact first
+argument and an inexact second argument, the computation is now
+performed as exact and then converted to inexact, instead of
+converting the first argument to inexact. The new approach ensures
+that the result is an inexact integer, and not sometimes
+\scheme{+nan.0}.
 
 \subsection{Fix 32-bit ARM floating-point dereference offset (10.4.0)}
 
