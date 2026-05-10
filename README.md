@@ -1,3 +1,7 @@
+> [!WARNING]
+> You don't need this fork.
+> ChezScheme now supports haiku.
+
 [![test](https://github.com/cisco/ChezScheme/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/cisco/ChezScheme/actions/workflows/ci.yml)
 
 *Tip: Clone this repo with* `git clone --filter=blob:none` *to avoid
